@@ -1,0 +1,70 @@
+
+BEDCS
+
+- all CITest-compatible BEDCS experiment files have been renamed with the identifying prefix "CITest_" and are now in a subdirectory, 'BEDCS', of the CITest MATLAB folder
+
+- the burden of computing long algorithmic variables in BEDCS (e.g. to indicate the number of pulses for the DSPPeriodic() function) hasbeen shifted to MATLAB, where all BEDCS variables are defined for each experiment in the faciliting script CITest_ExperimentDefinitions; this should in principle make it straight-forward to compute more complex pulse patterns in the future, such as pseudo-monophasic pulses, without creating a new BEDCS experiment file
+
+- where possible, BEDCS experiments allow for current steering with the parameter 'alpha'; alpha = 1 means the basal flanking channel receives all of the return current, alpha = 0 means the apical channel carries the return current, and 0.5 is symmetric; adjacent bipolar pairs are also possible with this convention when sigma = 1 and alpha = 0 or 1
+
+- control of current steering and bipolar configuration parameters is not actually implemented at this time, however
+
+- the visibility of the BEDCS application window can now be toggled ON and OFF using the button near the top-right of the screen labeled "[B]"; once an experiment has been checked out for safety and reliability, the window can be left closed to minimize distractions
+
+
+EXPERIMENT DEFINITIONS AND SUBJECT INTERFACE GUIS
+
+- choosing an experiment mode will call up a unique uipanel inside the 'Stimulus Parameters' panel; this uipanel comes from a separate GUI figure, and its callbacks are contained in the associated "utility" GUI m-file, but its parent figure becomes the main 'CITest' GUI; the MATLAB .fig and .m files that constitute such a utility GUI (also called a "subGUI") is referred to as an "experiment definition"
+
+- creating a new experiment types requires a new uipanel to be defined in its own figure; a good example is 'CITest_Exp_Threshold.fig', which contains a single ui control (a popup menu) for specifying how the "Threshold" experiment mode should be conducted
+
+- the same GUI defining the experiment-specific uipanel also must contain two key functions for interpreting ALL the stimulus parameters for the chosen experiment mode and submode: CITest_Exp_GetParameters() and CITest_Exp_TransformParameters; the outputs of these utility functions should completely specify the behavior of a single run of the experiment
+
+- the former "fitting" mode is now referred to as the "manual level" submode; it's available with any of the main experiment modes (gap detection, threshold, etc) and is accessed via the pulldown menu in the experiment-specific uipanel; stimulus parameters are set as usual, but during the run, current level is manually adjusted with the manual level control GUI ('CITest_SubGUI_Manual')
+
+
+
+GENERAL STIMULUS PARAMETERS
+
+- configuration is now specified in two parts, a "type" (like 'pTP' or 'BP') and a "code" (like the pTP current fraction or separation b/w BP electrodes); this will allow greater flexibility in the future, such as for implementing current steering or phased-array
+
+- all stimulus parameters are now grouped together in 'handles.stimparam'; be aware that the fields in this structure are not correctly updated until the START button is pressed
+
+- a given stimulus parameter is checked immediately when its associated UI control is changed; if the value is not valid (e.g. pTP current fraction out of range, illegal electrode channel given current configuration,non-integer subject number,etc), it reverts to the last valid entry, which is stored in that UI control's "User Data" structure; the UI control flashes red to tellyou that the input was invalid
+
+- phase duration is now a text field and contains the actual value used by BEDCS; its tooltip shows the present minimum frame size, which is usually 12*44/49 = 10.776 usec for BEDCS experiment files that use DSP_PERIODIC and 44/49 = 0.898 usec for those that don't
+
+- pulse train duration value will always be a multiple of the current pulse duration (2x phase duration) PLUS the zero-pulse duration in between pulses, which depends on the current pulse rate; note that by this definition, 10 pulses presented at 100 pulses/sec will span exactly 100 msec (there is an exception if the "1-Pulse" checkbox is checked, in which case train duration is undefined.); its tooltip shows the number of pulses in the train
+
+- "Presentation / max level" text field is either a fixed or rove-center level (e.g. for gap detection mode or for manual level adjustment) OR the maximum level to be presented (e.g. for MCL or PTC modes); its tooltip shows the displayed current in db uA.
+
+
+
+MISCELLANEOUS
+
+- the file to which the results from the NEXT CITest run will be saved is now indicated at the top of the GUI window; the directory can be changed by pressing the "V" button next to the file name; a change in certain stimulus parameters (e.g. active electrode number) will cause this expected file name to change
+
+- removed all "CreateFcn" functions for UI components, as these are usually unnecessary
+
+- removed m-file settings of default values for UI components because the .fig file stores these
+
+- removed unnecessary 'guidata()' calls
+
+- simplified the handling of the experiment mode radio buttons (using standard handling of a UI button group via the 'SelectionChangeFcn' property)
+
+
+
+
+
+
+
+TO DO
+
+- each experiment type/subtype has several pieces of information required to execute it:  1) the name of the subject interface (GUI figure), which will consist of the interval buttons and simply output which button was pressed upon UIRESUME;  2) the rules for the next stimulus (e.g. 1-up/2-down levitt tracking for current level or gap duration);  3) the BEDCS experiment name plus the fixed and variable BEDCS stimulus parameters required by the tracking program
+
+- experiment flow works as:    set parameters and load BEDCS experiment ---> pass parameters to tracking program  ---> trigger subject GUI and BEDCS stimulus presentation and wait for response
+
+- consider creating a status window, for relaying status or parameter updates from the subject/runtime gui
+
+- levitt tracking function:  inputs = last value, last direction and count (e.g. +2 or -3)
+

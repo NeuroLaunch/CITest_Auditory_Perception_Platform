@@ -1,0 +1,33 @@
+
+
+% Adding an experiment or run-time mode. %
+1) In CITEST, add experiment and associated info  to CITEST_SetupStimParam
+at the line with "switch expchoice"
+
+2) CITest_Exp_Initialize
+- returns information about the run-time mode and sub-experiment type
+- within the internal call to 'runmode_popupmenu()', initialize and turn on/off
+UI components within the experiment subGUI panel (the lower left panel in CITest)
+as needed
+
+3) CITest_Exp_GetPulseInfo
+- associate subtype of experiment with the particular pulse parameters that the
+BEDCS file requires; this can be customized, but it will be more work
+
+4) CITest_Exp_GetParameters
+- grab all the stimulus parameters that aren't from the main CITEST GUI
+- this now includes all pulse parameters accessible from the Pulse Mod menu;
+polarity and interphase gap should always be included for completeness, even
+when their values are not changeable
+- this function is also the time to determine if any of the main CITEST parameters
+are invalid for the experiment/sub-experiment/run-time mode; if so, declare a
+warning and make 'expParam' empty
+- 'expHandles' contains the exp subGUI's UI handles; 'handles' is for the main GUI
+- if a secondary channel is defined, such as for masking, this function must create
+fields in 'expParam' called '.electrode2', '.level', 'configcode', etc (i.e. parallel
+to the structure of 'mainParam' except the electrode string has a "2")
+- also, must set 'expParam.phcharge' to a value that best reflects the phase duration for
+purposes of charge-based current limits; usually the 'pulseSettings.phdur' value for primary channel is OK; but if a really long phase duration is defined and it's not attenuated proportionally, a higher value may be necessary
+
+5) CITest_Exp_TransformParameters
+
