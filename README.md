@@ -16,4 +16,12 @@ The program requires installation of the Bionic Ear Data Collection System (BEDC
 
 ## File Descriptions
 
+File | Type | Description
+---- | ---- | -----------
+.m | function | Main GUI program, starting point to launch CITest
+
 ## Permissions
+
+While CITest is freely distributed, please contact the principal investigator, Julie Arenberg, at julie_arenberg@meei.harvard.edu if you intend to use the software in any form. Access to BEDCS and a cochlear implant research interface must be arranged directly through Advanced Bionics (Sylmar, CA).
+
+Data or analysis, published or presented, that was made using this software should reference the following journal article: Bierer JA, Bierer SM, Kreft HA, Oxenham AJ. A fast method for measuring psychophysical thresholds across the cochlear implant array. _Trends in Hearing_. vol 19. 2015. (https://www.ncbi.nlm.nih.gov/pubmed/25656797)
