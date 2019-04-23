@@ -20,10 +20,13 @@ CITest was designed to be __highly modular__, an improvement over conventional c
 - The underlying code for a measurement or paradigm stays the same, providing reliability and portability.
 
 The program is also __highly flexible__ in terms of how channels and current levels are specified.
-- The measurement modules can be run on one or several channels, defined by the user.
+- The measurement modules can be applied to one channel or several sequential channels, defined by the user via a special GUI.
 - Monopolar, bipolar, tripolar, and quarupolar electrode configurations are supported.
 - Parameterized sharpening (sigma) and steering (alpha) are also supported, allowing even more flexibility in defining channels.
 - Current levels can be set with respect to subject threshold or comfort level (e.g. the program parses the user-supplied string "thr +2dB" to set a starting level to 2 dB log units above threshold).
+- Pulse shapes are fully customizable within the contstraints of BEDCS (e.g. standard bipolar, pseudo-monopolar).
+
+Analysis of data during and after acqusition is customizable via user-written utility functions.
 
 As with any neuro-stimulatory systems, __failsafes__ are implemented to prevent against over-stimulation.
 - Impedances of all electrodes can be measured and saved to provide a hard upper-limit of safe current injection.
@@ -31,19 +34,24 @@ As with any neuro-stimulatory systems, __failsafes__ are implemented to prevent 
 - The controller is warned if currents for a particular configuration are atypically high.
 - Safeguards set in CITest act on top of the ones implemented by BEDCS.
 
+The software is HIPAA compliant.
+- User identities and implant serial numbers are not stored or output.
+
 ## File Descriptions
 
 File | Type | Description
 ---- | ---- | -----------
 CITest.m | function | Main GUI program, the starting point to launch CITest
 CITest.fig | figure | Main GUI figure (see Fig. 1 above), called by CITest.m
-
-analyze_thrsweeps.m | script | [folder:custom analysis] Utility to process channel sweep data
-custom_threshold.m | function | Extension for customizing data analysis; calls analyze_thrsweeps.m by default
-loadresults_citest.m | function | Utility to collect related results files for further analysis
+--- | --- | _To be filled in soon_
+analyze_thrsweeps.m | script | [in "custom analysis"] Utility to process channel sweep data
+custom_threshold.m | function | [in "custom analysis"] Extension for customizing data analysis; calls analyze_thrsweeps.m by default
+loadresults_citest.m | function | [in "custom analysis"] Utility to collect related results files for further analysis
 
 ## Permissions
 
-While CITest is freely distributed, please contact the principal investigator, Julie Arenberg, at julie_arenberg@meei.harvard.edu if you intend to use the software in any form. Access to BEDCS and a cochlear implant research interface must be arranged directly through Advanced Bionics (Sylmar, CA).
+While CITest is freely distributed, please contact the principal investigator, Julie Arenberg, at julie_arenberg@meei.harvard.edu if you intend to use the software in any form. Access to BEDCS and the interface hardware must be arranged directly through Advanced Bionics (Sylmar, CA).
+
+Please be aware that most institutions will require
 
 Data or analysis, published or presented, that was made using this software should reference the following journal article: Bierer JA, Bierer SM, Kreft HA, Oxenham AJ. A fast method for measuring psychophysical thresholds across the cochlear implant array. _Trends in Hearing_. vol 19. 2015. (https://www.ncbi.nlm.nih.gov/pubmed/25656797)
