@@ -28,11 +28,11 @@ The program is also __highly flexible__ in terms of how channels and current lev
 
 Analysis of data during and after acqusition is customizable via user-written utility functions.
 
-As with any neuro-stimulatory systems, __failsafes__ are implemented to prevent against over-stimulation.
+As with any neuro-stimulatory systems, numerous __failsafes__ are implemented to reduce the risk of over-stimulation.
 - Impedances of all electrodes can be measured and saved to provide a hard upper-limit of safe current injection.
 - Maximum comfort levels, specific to each configuration, must be specified before stimulation can occur.
 - The controller is warned if currents for a particular configuration are atypically high.
-- Safeguards set in CITest act on top of the ones implemented by BEDCS.
+- Safeguards set in CITest act on top of those implemented by BEDCS.
 
 The software is HIPAA compliant.
 - User identities and implant serial numbers are not stored or output.
@@ -48,10 +48,10 @@ analyze_thrsweeps.m | script | [in "custom analysis"] Utility to process channel
 custom_threshold.m | function | [in "custom analysis"] Extension for customizing data analysis; calls analyze_thrsweeps.m by default
 loadresults_citest.m | function | [in "custom analysis"] Utility to collect related results files for further analysis
 
-## PERMISSIONS
+## USAGE INFORMATION
 
 While CITest is freely distributed, please contact the principal investigator, Julie Arenberg, at julie_arenberg@meei.harvard.edu if you intend to use the software in any form. Access to BEDCS and the interface hardware must be arranged directly through Advanced Bionics (Sylmar, CA).
 
-Please be aware that most institutions will require
+Be aware that most institutions require prior approval of an experimental protocol before any research with human participants can be conducted. The creators will not be liable for any damages caused by use of this code or modified versions of it. The application of safe stimulation practices are solely the responsibility of the end user. As such, it is recommended that all users carefully understand how the program controls current intensity and the implementation and limitations of the safeguards.
 
 Data or analysis, published or presented, that was made using this software should reference the following journal article: Bierer JA, Bierer SM, Kreft HA, Oxenham AJ. A fast method for measuring psychophysical thresholds across the cochlear implant array. _Trends in Hearing_. vol 19. 2015. (https://www.ncbi.nlm.nih.gov/pubmed/25656797)
