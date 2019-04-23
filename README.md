@@ -1,6 +1,6 @@
 # CITest : A Modular Platform for Testing Cochlear Implant Perception
 
-## Overview
+## OVERVIEW
 
 CITest is a MATLAB-based program to control psychophysical hearing experiments for wearers of Advanced Bionics cochlear implants. It was developed, starting in 2011, for the Cochlear Implant Psychophysics Laboratory at the University of Washington in Seattle. The software was originally distributed to authorized external laboratories via a shared folder on Dropbox, where this GitHub repository will continue to be mirrored.
 
@@ -37,7 +37,7 @@ As with any neuro-stimulatory systems, __failsafes__ are implemented to prevent 
 The software is HIPAA compliant.
 - User identities and implant serial numbers are not stored or output.
 
-## File Descriptions
+## FILE DESCRIPTIONS
 
 File | Type | Description
 ---- | ---- | -----------
@@ -48,7 +48,7 @@ analyze_thrsweeps.m | script | [in "custom analysis"] Utility to process channel
 custom_threshold.m | function | [in "custom analysis"] Extension for customizing data analysis; calls analyze_thrsweeps.m by default
 loadresults_citest.m | function | [in "custom analysis"] Utility to collect related results files for further analysis
 
-## Permissions
+## PERMISSIONS
 
 While CITest is freely distributed, please contact the principal investigator, Julie Arenberg, at julie_arenberg@meei.harvard.edu if you intend to use the software in any form. Access to BEDCS and the interface hardware must be arranged directly through Advanced Bionics (Sylmar, CA).
 
