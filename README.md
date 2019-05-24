@@ -10,7 +10,7 @@ Please see the documentation file, [CITest_Documentation.pdf](./documentation/CI
 
 The software, currently at __version 1.27__, has been tested with MATLAB R2017B running on the Windows 7 and Windows 10 operating systems. Earlier versions of CITest (contact S. Bierer for access) were designed to run on MATLAB R2007B and higher. No additional toolboxes are required.
 
-The program requires installation of the Bionic Ear Data Collection System (BEDCS), version 1.18, available from the (Advanced Bionics Corporation)[https://advancedbionics.com/us/en/home.html]. To generate electrical stimulation through an implant, an Advanced Bionics research interface compatible with BEDCS is also required. Without this hardware connection, which allows an implant to be controlled by the host PC, only the "demo" mode of CITest can be run.
+The program requires installation of the Bionic Ear Data Collection System (BEDCS), version 1.18, available from the (Advanced Bionics Corporation)[https://advancedbionics.com/us/en/home.html]. To generate electrical stimulation through an implant, an Advanced Bionics research interface compatible with BEDCS is also required. Without this hardware connection, which enables an implant to be controlled by the host PC, only the "demo" mode of CITest will function.
 
 ### Features
 
@@ -26,16 +26,18 @@ The program is also __highly flexible__ in terms of how channels and current lev
 - Current levels can be set with respect to subject threshold or comfort level (e.g. the program parses the user-supplied string "thr +2dB" to set a starting level to 2 dB log units above threshold).
 - Pulse shapes are fully customizable within the contstraints of BEDCS (e.g. standard bipolar, pseudo-monopolar).
 
-Analysis of data during and after acqusition is customizable via user-written utility functions.
+One of the modules offers a __fast measurement__ of thresholds or masking patterns by sweeping across the electrode array. See Bierer _et al_ (Trends in Hearing: 2015) for a description of this functionality, analagous to a procedure using acoustic stimuli put forth by Bekesy.
 
-As with any neuro-stimulatory systems, numerous __failsafes__ are implemented to reduce the risk of over-stimulation.
+Analysis of data during and after acqusition is customizable by automatic invocation of __user-written analysis functions__.
+
+As expected for any neuro-stimulatory system, numerous __failsafes__ are implemented to reduce the risk of over-stimulation.
 - Impedances of all electrodes can be measured and saved to provide a hard upper-limit of safe current injection.
 - Maximum comfort levels, specific to each configuration, must be specified before stimulation can occur.
 - The controller is warned if currents for a particular configuration are atypically high.
 - Safeguards set in CITest act on top of those implemented by BEDCS.
 
-The software is HIPAA compliant.
-- User identities and implant serial numbers are not stored or output.
+The software is __HIPAA compliant__.
+- User identities and implant serial numbers are not stored or output by the software.
 
 ## FILE DESCRIPTIONS
 
