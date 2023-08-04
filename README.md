@@ -4,7 +4,7 @@
 
 CITest is a MATLAB-based program to control psychophysical hearing experiments for wearers of Advanced Bionics cochlear implants. It was developed, starting in 2011, for the Cochlear Implant Psychophysics Laboratory at the University of Washington in Seattle. The software was originally distributed to authorized external laboratories via a shared folder on Dropbox, where this GitHub repository will continue to be mirrored.
 
-Please see the documentation file, [CITest_Documentation.pdf](./documentation/CITest%20Documentation_v01.21.pdf), for a complete overview of the CITest software suite and instructions for setting it up. Additional information about the primary program files (MATLABL functions, scripts, and figures) are listed below.
+Please see the documentation file, [CITest_Documentation.pdf](./documentation/CITest%20Documentation_v01.21.pdf), for a complete overview of the CITest software suite and instructions for setting it up. Additional information about the primary program files (MATLAB functions, scripts, and figures) are listed below.
 
 ### System Requirements
 
